@@ -9,9 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
-    /* ============================================================
-       BASE RESET
-    ============================================================ */
+
+
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -27,16 +26,14 @@
       flex-direction: column;
       align-items: center;
       background-color: #87ceeb;
-      background-image: url('https://static.wikia.nocookie.net/pokemon/images/7/73/HGSS_Route_29.png/revision/latest?cb=20100909010532');
+      background-image: url('img/bg.png');
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
       background-attachment: fixed;
     }
 
-    /* ============================================================
-       HEADER
-    ============================================================ */
+
     #page-header {
       text-align: center;
       padding: 2.5vh 5vw 1.5vh;
@@ -61,9 +58,7 @@
       opacity: 0.8;
     }
 
-    /* ============================================================
-       GAME FORM WRAPPER
-    ============================================================ */
+
     #game-form {
       display: flex;
       flex-direction: column;
@@ -72,9 +67,7 @@
       width: 100%;
     }
 
-    /* ============================================================
-       RESET BUTTON — hidden until a choice is made
-    ============================================================ */
+
     #reset-btn {
       display: none;
       margin: 2vh auto 0;
@@ -101,14 +94,11 @@
       box-shadow: 2px 2px 0 #1a1a2e;
     }
 
-    /* Show reset button once any radio is checked */
     #game-form:has(input[type="radio"]:checked) #reset-btn {
       display: block;
     }
 
-    /* ============================================================
-       FIELD — three patches side by side
-    ============================================================ */
+
     #field {
       display: flex;
       gap: 3vw;
@@ -119,32 +109,22 @@
       width: 100%;
     }
 
-    /* ============================================================
-       PATCH WRAPPER
-    ============================================================ */
     .patch-wrapper {
       position: relative;
       width: 25vw;
       height: 40vh;
-      /* Transition for the dim-others-on-hover effect */
       transition: opacity 0.2s ease;
     }
 
-    /* :hover on patch-wrapper dims following siblings */
     .patch-wrapper:hover ~ .patch-wrapper {
       opacity: 0.6;
     }
 
-    /* ============================================================
-       RADIO INPUTS — visually hidden, functionally present
-    ============================================================ */
+
     input[type="radio"] {
       display: none;
     }
 
-    /* ============================================================
-       GRASS PATCH LABEL — the clickable tile
-    ============================================================ */
     .grass-patch {
       display: flex;
       flex-direction: column;
@@ -169,19 +149,16 @@
       transform: translate(-2px, -2px);
     }
 
-    /* :active press feedback */
     .grass-patch:active {
       transform: scale(0.97);
       box-shadow: 3px 3px 0 #1a1a2e;
     }
 
-    /* :focus — keyboard accessibility */
     .grass-patch:focus {
       outline: 4px solid #ffcb05;
       outline-offset: 3px;
     }
 
-    /* > child selector: hover on patch label animates child grass-img */
     .grass-patch:hover > .grass-img {
       animation: rustle 0.4s ease-in-out infinite;
     }
@@ -206,15 +183,12 @@
       user-select: none;
     }
 
-    /* Locked patch — slightly different style for the blocked patch */
     .grass-patch.locked {
       background-color: #4a7a2e;
       border-color: #333;
     }
 
-    /* ============================================================
-       GRASS RUSTLE KEYFRAMES
-    ============================================================ */
+
     @keyframes rustle {
       0%   { transform: rotate(0deg); }
       25%  { transform: rotate(-3deg) translateX(-2px); }
@@ -223,9 +197,6 @@
       100% { transform: rotate(0deg); }
     }
 
-    /* ============================================================
-       REVEAL PANELS — hidden by default
-    ============================================================ */
     .reveal {
       display: none;
       position: absolute;
@@ -278,11 +249,7 @@
       font-weight: 700;
     }
 
-    /* ============================================================
-       CHECKBOX HACK — selector trio required by PRD
-    ============================================================ */
 
-    /* + adjacent sibling: checked radio hides the adjacent grass-patch label */
     #choose-mew:checked + .grass-patch,
     #choose-magikarp:checked + .grass-patch,
     #choose-blocked:checked + .grass-patch {
@@ -290,14 +257,11 @@
       pointer-events: none;
     }
 
-    /* ~ general sibling: checked radio shows its paired reveal panel */
     #choose-mew:checked ~ .mew-reveal         { display: flex; }
     #choose-magikarp:checked ~ .magikarp-reveal { display: flex; }
     #choose-blocked:checked ~ .blocked-reveal   { display: flex; }
 
-    /* ============================================================
-       FOOTER
-    ============================================================ */
+
     #page-footer {
       text-align: center;
       padding: 2vh 5vw;
@@ -310,18 +274,13 @@
       border-top: 3px solid #1a1a2e;
     }
 
-    /* ============================================================
-       MEDIA QUERIES — minimum 3 breakpoints
-    ============================================================ */
 
-    /* Tablet: <= 1023px */
     @media (max-width: 1023px) {
       #field { gap: 2vw; }
       .patch-wrapper { width: 28vw; height: 35vh; }
       h1 { font-size: 5vw; }
     }
 
-    /* Mobile: <= 767px — stack vertically */
     @media (max-width: 767px) {
       #field {
         flex-direction: column;
@@ -334,7 +293,6 @@
       #reset-btn { font-size: 3vmin; padding: 1.5vh 6vw; }
     }
 
-    /* Small mobile: <= 480px */
     @media (max-width: 480px) {
       .patch-wrapper { width: 90vw; height: 20vh; }
       h1 { font-size: 7vw; }
@@ -346,19 +304,15 @@
 </head>
 <body>
 
-  <!-- Page header -->
   <header id="page-header">
     <h1>A rustling in the tall grass...</h1>
-    <p>Hover to investigate. Click to commit.</p>
+    <p>Hover to investigate...</p>
   </header>
 
-  <!-- Game form: wraps all inputs so button type="reset" clears radios natively -->
   <form id="game-form" autocomplete="off">
 
-    <!-- Three grass patches -->
     <main id="field">
 
-      <!-- Patch 1: Shiny Mew -->
       <div class="patch-wrapper" id="patch-mew">
         <input type="radio" name="grass" id="choose-mew">
         <label for="choose-mew" class="grass-patch" title="A rustling patch of tall grass">
@@ -369,12 +323,11 @@
           <img src="img/mew-shiny.png" alt="A rare Shiny Mew, glowing with a soft blue aura, floats gently in the air" class="pokemon-img">
           <div class="encounter-text">
             <h2>A wild <span class="shiny-label">✨ Shiny Mew</span> appeared!</h2>
-            <p>"This is a miracle. Trainers search their whole lives for this moment."</p>
+            <p>"This is a miracle! Trainers search their whole lives for this moment."</p>
           </div>
         </div>
       </div>
 
-      <!-- Patch 2: Magikarp -->
       <div class="patch-wrapper" id="patch-magikarp">
         <input type="radio" name="grass" id="choose-magikarp">
         <label for="choose-magikarp" class="grass-patch" title="A rustling patch of tall grass">
@@ -390,12 +343,11 @@
         </div>
       </div>
 
-      <!-- Patch 3: No Entry -->
       <div class="patch-wrapper" id="patch-blocked">
         <input type="radio" name="grass" id="choose-blocked">
         <label for="choose-blocked" class="grass-patch locked" title="This patch of grass seems strangely still">
           <img src="img/grass.png" alt="A suspiciously still patch of tall grass" class="grass-img">
-          <span class="grass-question">!</span>
+          <span class="grass-question">?</span>
         </label>
         <div class="reveal blocked-reveal">
           <img src="img/no-entry.png" alt="A red and white No Entry sign blocks the path forward" class="pokemon-img">
@@ -408,12 +360,10 @@
 
     </main>
 
-    <!-- Reset button — shown via CSS :has() when a radio is checked -->
     <button type="reset" id="reset-btn">&#8617; Try Again</button>
 
   </form>
 
-  <!-- Page footer -->
   <footer id="page-footer">
     <p>Pokémon and all related names are trademarks of Nintendo / Game Freak.</p>
   </footer>
